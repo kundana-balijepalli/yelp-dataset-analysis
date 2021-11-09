@@ -8,17 +8,21 @@ The pandemic has pushed businesses and consumers to shift to an online service o
 ## 2. Data Exploration 
 
 The Yelp dataset contained the following JSON files and was a total size of approximately 23.5 GB: 
-•	Business
-•	Checkin 
-•	Covid features
-•	Review
-•	Tip
-•	User
+- Business
+- Checkin 
+- Covid features
+- Review
+- Tip
+- User
 
-For this research, only relevant files are business and reviews. 
+For this research, only relevant files are business and reviews. Only reviews of restuarants with over 100 review count were filtered out. Then top 10 states with the most restuarants were extracted and analyzed. A restaurant called Buffet Palace with 383 reviews was randomly selected for further analysis. The overall rating for Buffetpalace is 3.5 stars. Lastly, only important attributes such as Review Id, Business Id, star rating, and text were extracted into a CSV file for further analysis.
 
 ## 3. Pre - processing
 
-## 4. Sentimental Analysis
+The following diagram illustrations the steps taken to pre-process the text:
+
+
 
 ## 5. Topic prediction
+
+## 5. Sentimental Analysis

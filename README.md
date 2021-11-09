@@ -17,11 +17,14 @@ The Yelp dataset contained the following JSON files and was a total size of appr
 
 For this research, only relevant files are business and reviews. Only reviews of restuarants with over 100 review count were filtered out. Then top 10 states with the most restuarants were extracted and analyzed. A restaurant called Buffet Palace with 383 reviews was randomly selected for further analysis. The overall rating for Buffetpalace is 3.5 stars. Lastly, only important attributes such as Review Id, Business Id, star rating, and text were extracted into a CSV file for further analysis.
 
+![alt text](https://github.com/kundana-balijepalli/yelp-dataset-analysis/blob/main/Images/Preview%20of%20data.JPG)
+
+
 ## 3. Pre - processing
 
 The following diagram illustrations the steps taken to pre-process the text:
 
-
+![alt text](https://github.com/kundana-balijepalli/yelp-dataset-analysis/blob/main/Images/Pre-processing.JPG)
 
 ## 5. Topic prediction
 

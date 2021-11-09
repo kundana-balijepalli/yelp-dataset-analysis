@@ -1,0 +1,142 @@
+---
+title: "CIND820"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+Reading Reviews CSV file
+
+
+```{r}
+
+reviews <- read.csv("C:/Users/Kundana/Downloads/yelp_data/yelp-data-reviews.csv",stringsAsFactors=FALSE,sep = ",", header = TRUE, na.strings=c("","NA"))
+```
+
+Reading Business Data CSV file
+
+```{r}
+
+
+businessdata <- read.csv("C:/Users/Kundana/Downloads/yelp_data/yelp-business-data.csv",stringsAsFactors=FALSE,sep = ",", header = TRUE, na.strings=c("","NA"))
+
+```
+
+
+Extracting Businesses that are only restaurants
+```{r}
+library(dplyr)    # alternatively, this also loads %>%
+library(data.table);
+
+filteredbusiness  <- businessdata %>% 
+        #     filter(state %in% state.abb) %>% 
+             filter(categories %like% "Restaurant" & review_count >= 100)
+
+str(filteredbusiness)
+```
+
+
+```{r}
+```
+```{r}
+
+library(DT)
+
+#Top 10 states with the most restaurants
+
+filteredbusiness %>% select(state,city) %>% 
+             dplyr::group_by(state,city) %>% 
+             summarise(n = n()) %>% 
+             arrange(desc(n)) %>% 
+             head(n = 10) %>%
+             datatable(class = 'cell-border stripe hover condensed responsive')
+
+```
+
+```{r}
+
+top_10_restuarants <- filteredbusiness %>% filter()
+         filter(rank(desc(review_count))<=10)
+
+top_10_restuarants[c("business_id","name","state","stars","review_count")]
+```
+
+```{r}
+
+library(ggplot2)
+library(tidyr)
+
+cuisine_list <- c( "American (Traditional)", "American (New)", "Sandwiches", "Fast Food", "Mexican", "Pizza", "Italian", "Chinese", "Ice Cream & Frozen Yogurt", "Bakeries", "Desserts", "Seafood", "Sushi Bars", "Juice Bars & Smoothies", "Mediterranean", "Steakhouses", "Burgers", "Salad", "Barbeque", "Cocktail Bars", "Thai", "Buffets", "Hot Dogs", "Asian", "Japanese", "American", "Indian")
+
+top_cusine_plot <- filteredbusiness %>% 
+                   # Only city and categories are needed for this analysis
+                   dplyr::select(city , categories) %>%
+                   # categories are seperated by ; in teh variable
+                   transform(categories = strsplit(categories, ";")) %>%
+                   # A single row is created for each category from the list
+                   unnest(categories) %>%
+                   # Only categories in the cuisine_list is considered
+                   filter(categories %in% cuisine_list)  %>%  
+                    dplyr::group_by(categories,city) %>%
+                    # Count is calculated a combination of city and category
+                    tally() %>% 
+                    # Top 5 categories for a city is filtered 
+                    dplyr::group_by(city) %>% 
+                    top_n(n = 5) %>% 
+                    # To plot uniformly, ranks are given. Maximum count is given the rank 1
+                    mutate(count_rank = rank(-n)) %>% 
+                    # Bar chart for each city is shown
+                    ggplot(aes(x = count_rank, y = n))+ 
+                    geom_bar(stat = "identity", fill = "steel blue", alpha = 0.3) + 
+                    facet_wrap(~city, nrow = 2, scales = "free") + 
+                    coord_flip() + 
+                    # 1 should come on the top
+                    scale_x_reverse() +
+                    # Name of the cuisine is displayed inside the bars
+                    geom_text(aes(label = categories), size = 2,hjust="inward") 
+
+top_cusine_plot
+
+
+```
+
+```{r}
+write.csv(filteredbusiness,"C:\\Users\\Kundana\\Downloads\\filteredbusiness.csv", row.names = FALSE)
+
+```
+
+```{r}
+
+buffetpalace <-  reviews %>% 
+        #     filter(state %in% state.abb) %>% 
+             filter(business_id %like% 'HJisBzwgGpCZu0ZkO8LFzA')
+
+```
+
+```{r}
+
+#Extracting only features : Review Id, Business Id, Star, Text
+
+buffetpalace2 <- subset(buffetpalace, select = c(2,4,5,9))
+
+
+#Checking for rows with an NA values and omitting rows with NAs
+buffetpalace2[rowSums(is.na(buffetpalace2))==0,]
+
+
+#Writing the dataset into a csv file
+write.csv(buffetpalace2,"C:\\Users\\Kundana\\Downloads\\buffetpalace.csv", row.names = FALSE)
+
+head(buffetpalace2)
+
+```
+

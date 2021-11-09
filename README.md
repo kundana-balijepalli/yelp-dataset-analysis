@@ -28,5 +28,10 @@ The following diagram illustrations the steps taken to pre-process the text:
 
 ## 5. Topic prediction
 
-First, each review was broken down into various dimensions or topics. As above mentioned, these dimensions can be service, food, pricing etc. For topic modelling, we will use un-supervised learning algorithm Latent Dirichlet Allocation (LDA) as our model. The reason for choosing this modelling technique is because LDA treats each document as a mixture of topics, and each topic as a mixture of words. This is especially useful in our evaluation of reviews as users often comment on various aspects of their experience in the food establishment.
+First, each review was broken down into various dimensions or topics. As above mentioned, these dimensions can be service, food, pricing etc. For topic modelling, we will use un-supervised learning algorithm Latent Dirichlet Allocation (LDA) as our model. The reason for choosing this modelling technique is because LDA treats each document as a mixture of topics, and each topic as a mixture of words. 
+
+I will attempt LDA in R and Python as well using libraries: LDA Gensim, Scikit-Learn and LDA Mallet
+Currently, I am in the processing of testing LDA using query search in R
+
+
 ## 5. Sentimental Analysis

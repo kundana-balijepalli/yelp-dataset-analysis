@@ -30,8 +30,17 @@ The following diagram illustrations the steps taken to pre-process the text:
 
 First, each review was broken down into various dimensions or topics. As above mentioned, these dimensions can be service, food, pricing etc. For topic modelling, we will use un-supervised learning algorithm Latent Dirichlet Allocation (LDA) as our model. The reason for choosing this modelling technique is because LDA treats each document as a mixture of topics, and each topic as a mixture of words. 
 
-I will attempt LDA in R and Python as well using libraries: LDA Gensim, Scikit-Learn and LDA Mallet
-Currently, I am in the processing of testing LDA using query search in R
+I attempted LDA in R and found the available libraries to be limited. Hence, I am experiementing with the following Python libraries currently: LDA Gensim, Scikit-Learn and LDA Mallet
+
+Here are the visuals of topic modeling using LDA Gensim library in python
+
+![alt text](https://github.com/kundana-balijepalli/yelp-dataset-analysis/blob/main/Images/topic1.JPG)
+
+![alt text](https://github.com/kundana-balijepalli/yelp-dataset-analysis/blob/main/Images/topic2.JPG)
+
+![alt text](https://github.com/kundana-balijepalli/yelp-dataset-analysis/blob/main/Images/topic3.JPG)
+
+![alt text](https://github.com/kundana-balijepalli/yelp-dataset-analysis/blob/main/Images/topic4.JPG)
 
 
 ## 5. Sentimental Analysis
